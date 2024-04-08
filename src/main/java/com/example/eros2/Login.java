@@ -21,8 +21,12 @@ public class Login extends HttpServlet {
 		String nickname = request.getParameter("nickname");
 		String password = request.getParameter("password");
 		log.trace("{} {}", nickname, password); // non si fa!
-		request.getRequestDispatcher("login.jsp").forward(request, response);
-
+		if (nickname.equals("Mario")) {
+			request.getRequestDispatcher("home.jsp").forward(request, response);
+		} else {
+			request.getRequestDispatcher("login.html").forward(request, response);
+		}
+		
 	}
 
 }

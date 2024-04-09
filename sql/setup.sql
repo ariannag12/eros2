@@ -21,3 +21,15 @@ CREATE TABLE UserProfile (
     Location VARCHAR(255),
     FOREIGN KEY (UserID) REFERENCES Users(UserID)
 );
+
+INSERT INTO eros.Users (Email, Password, Username, FirstName, LastName, Gender, BirthDate)
+VALUES 
+    ('mario@gmail.com', 'mario123', 'mario_r', 'Mario', 'Rossi', 'Maschio', '1990-05-15'),
+    ('laura@gmail.com', 'laura456', 'laura_b', 'Laura', 'Bianchi', 'Femmina', '1993-10-20');
+
+-- Inserire dati nella tabella UserProfile
+INSERT INTO UserProfile (UserID, Bio, ProfilePicURL, Location)
+VALUES
+    (1, 'Sono Mario Rossi, un appassionato di tecnologie web.', 'https://example.com/mario.jpg', 'Roma'),
+    (2, 'Ciao! Sono Laura Bianchi e amo viaggiare.', 'https://example.com/laura.jpg', 'Milano');
+

@@ -1,6 +1,7 @@
 DROP TABLE IF EXISTS UserProfile;
 DROP TABLE IF EXISTS Users;
- 
+
+--tabelle 
 CREATE TABLE Users (
     UserID SERIAL PRIMARY KEY,
     Email VARCHAR(255) UNIQUE NOT NULL,

@@ -1,4 +1,4 @@
-package com.example.eros2;
+package com.example.eros2.svr;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;

@@ -6,6 +6,7 @@
 package com.example.eros2.dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -23,8 +24,8 @@ public class LoginDao implements AutoCloseable {
 			FROM users
 			WHERE userName = ? and password = ?""";
 	private static final String INSERT = """
-			INSERT INTO users (userName, firstName, lastName, password) VALUES
-			    (?, ?, ?, ?)""";
+			INSERT INTO users (email, password, userName, firstName, lastName, gender, birthdate) VALUES
+			    (?, ?, ?, ?, ?, ?, ?)""";
 	private Connection conn;
 
 	public LoginDao(DataSource ds) {
@@ -43,7 +44,7 @@ public class LoginDao implements AutoCloseable {
 			ps.setString(2, password);
 			try (ResultSet rs = ps.executeQuery()) {
 				if (rs.next()) {
-					return new Login(rs.getString(1), rs.getString(2), rs.getString(3));
+					return new Login(rs.getString(1), rs.getString(2), rs.getString(3), null, null, null, null);
 				}
 			}
 		} catch (SQLException se) {
@@ -53,12 +54,15 @@ public class LoginDao implements AutoCloseable {
 		return null;
 	}
 
-	public void registerUser(String userName, String firstName, String lastName, String password) {
+	public void registerUser(String email, String password, String userName, String firstName, String lastName, String gender, Date birthdate ) {
 		try (PreparedStatement ps = conn.prepareStatement(INSERT)) {
-			ps.setString(1, userName);
-			ps.setString(2, firstName);
-			ps.setString(3, lastName);
-			ps.setString(4, password);
+		    ps.setString(2, email);
+		    ps.setString(3, password);
+		    ps.setString(4, userName);
+			ps.setString(5, firstName);
+			ps.setString(6, lastName);
+			ps.setString(7, gender);
+			ps.setDate(8, birthdate);
 			ps.executeUpdate();
 			log.info("User" + userName + "registered successfully.");
 		} catch (SQLException se) {

@@ -21,7 +21,7 @@ public class LoginServlet extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
     private static final Logger log = LogManager.getLogger(LoginServlet.class);
-
+    Login user = null;
     @Resource(name = "jdbc/eros")
     private DataSource ds;
 
@@ -37,10 +37,10 @@ public class LoginServlet extends HttpServlet {
         } catch (Exception e) {
             log.error("");
         }
-        if (nickname.equals("Mario")) {
+        if (user !=null) {
             request.getRequestDispatcher("home.jsp").forward(request, response);
         } else {
-            request.getRequestDispatcher("login.html").forward(request, response);
+            request.getRequestDispatcher("createaccount.html").forward(request, response);
         }
 
     }

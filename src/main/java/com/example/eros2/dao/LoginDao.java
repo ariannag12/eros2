@@ -22,9 +22,9 @@ public class LoginDao implements AutoCloseable {
 			SELECT userName, firstName, lastName
 			FROM users
 			WHERE userName = ? and password = ?""";
-//    private static final String INSERT = """
-//            INSERT INTO users (userID, email, password, username, firstName, lastName, gender, birthDate) VALUES
-//                (?, ?, ?, ?, ?, ?, ?, ?)""";
+	private static final String INSERT = """
+			INSERT INTO users (userName, firstName, lastName, password) VALUES
+			    (?, ?, ?, ?)""";
 	private Connection conn;
 
 	public LoginDao(DataSource ds) {
@@ -51,6 +51,19 @@ public class LoginDao implements AutoCloseable {
 		}
 
 		return null;
+	}
+
+	public void registerUser(String userName, String firstName, String lastName, String password) {
+		try (PreparedStatement ps = conn.prepareStatement(INSERT)) {
+			ps.setString(1, userName);
+			ps.setString(2, firstName);
+			ps.setString(3, lastName);
+			ps.setString(4, password);
+			ps.executeUpdate();
+			log.info("User" + userName + "registered successfully.");
+		} catch (SQLException se) {
+			log.error("Error registering user " + userName, se);
+		}
 	}
 
 	@Override

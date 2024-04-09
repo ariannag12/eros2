@@ -33,3 +33,4 @@ VALUES
     (1, 'Sono Mario Rossi, un appassionato di tecnologie web.', 'https://example.com/mario.jpg', 'Roma'),
     (2, 'Ciao! Sono Laura Bianchi e amo viaggiare.', 'https://example.com/laura.jpg', 'Milano');
 
+--dati inseriti

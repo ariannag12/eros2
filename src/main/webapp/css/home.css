@@ -1,12 +1,6 @@
 @charset "UTF-8";
 
 .immagine {
-	width: 50px;
+	width: 200px;
+	margin: 10px;
 }
-
-.card {
-	padding: 20px;
-	margin: 0 auto;
-	width: 300px;
-}
-

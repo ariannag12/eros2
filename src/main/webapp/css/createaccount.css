@@ -4,6 +4,16 @@
 	width:100%;
 }
 
-button {
+.button {
 	width: 100px;
+	margin: 0 auto;
+}
+
+h5 {
+	padding-top:10px;
+	padding-bottom: 5px;
+}
+
+label #dateStandard {
+	padding-bottom:5px;
 }

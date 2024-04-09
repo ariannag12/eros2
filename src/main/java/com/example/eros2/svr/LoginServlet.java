@@ -32,6 +32,7 @@ public class LoginServlet extends HttpServlet {
 
         try (LoginDao dao = new LoginDao(ds)) {
             Login user = dao.get(nickname, password);
+            request.setAttribute("user", user);
             log.info(user);
         } catch (Exception e) {
             log.error("");

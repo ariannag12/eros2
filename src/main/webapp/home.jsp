@@ -15,8 +15,8 @@
   <img src="img/image.png" class="card-img-top" alt="utente">
   </div>
  <c:choose>
-		<c:when test="${not empty param.nickname}">
-			<h1>Ciao e benvenuto, ${param.nickname}</h1>
+		<c:when test="${not empty user}">
+			<h1>Ciao e benvenuto, ${user.firstName}</h1>
 		</c:when>
 				<c:otherwise>
 			<h1>Credenziali non valide</h1>

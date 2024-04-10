@@ -19,8 +19,10 @@
     </div>
   <div class="mb-3">
     <label for="password" class="form-label">Password</label>
-    <input type="password" id="password" name="password" class="form-control" placeholder="Scrivi la tua password">
+    <input type="password" id="password" name="password" class="form-control" placeholder="Scrivi la tua password">   
   </div>
+  <c:if test="${userName}"><p>nickname o password errati!</p></c:if>
+ 	
    <button type="submit" class="btn btn-secondary">Entra</button>
    <div class="registration-container">
     <button type="button" class="btn btn-primary">Registrazione</button>

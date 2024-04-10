@@ -34,3 +34,4 @@ VALUES
     (2, 'Ciao! Sono Laura Bianchi e amo viaggiare.', 'https://example.com/laura.jpg', 'Milano');
 
 --dati inseriti--
+   

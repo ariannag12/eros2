@@ -21,7 +21,7 @@ public class LoginServlet extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
     private static final Logger log = LogManager.getLogger(LoginServlet.class);
-    Login user = null;
+   
     @Resource(name = "jdbc/eros")
     private DataSource ds;
 
@@ -29,9 +29,9 @@ public class LoginServlet extends HttpServlet {
             throws ServletException, IOException {
         String nickname = request.getParameter("nickname");
         String password = request.getParameter("password");
-
+        Login user = null;
         try (LoginDao dao = new LoginDao(ds)) {
-            Login user = dao.get(nickname, password);
+            user = dao.get(nickname, password);
             request.setAttribute("user", user);
             log.info(user);
         } catch (Exception e) {

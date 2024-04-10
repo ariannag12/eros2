@@ -23,7 +23,7 @@
   <c:if test="${userName}"><p>nickname o password errati!</p></c:if>
  	
    <button type="submit" class="btn btn-secondary">Entra</button>
-   <button type="submit" class="btn btn-secondary">Registrazione</button>
+   <button type="submit" class="btn btn-primary">Registrazione</button>
 
 </form>
 </div>

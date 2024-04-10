@@ -40,7 +40,7 @@ public class LoginServlet extends HttpServlet {
         if (user !=null) {
             request.getRequestDispatcher("home.jsp").forward(request, response);
         } else {
-            request.getRequestDispatcher("createaccount.html").forward(request, response);
+            request.getRequestDispatcher("login.jsp").forward(request, response);
         }
 
     }

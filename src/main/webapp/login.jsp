@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,7 +14,7 @@
 <form method="post" action="login">
  <div class="mb-3">
     <label for="nickname" class="form-label">Nickname</label>
-    <input name="username" id="nickname" class="form-control" placeholder="Scrivi il tuo nickname">
+    <input name="username" id="nickname" class="form-control" placeholder="Scrivi il tuo nickname" value="${userName}">
     </div>
   <div class="mb-3">
     <label for="password" class="form-label">Password</label>

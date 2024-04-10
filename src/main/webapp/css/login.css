@@ -9,12 +9,4 @@ body {
 	width: 400px;
 	margin-top: 80px;
 }
-	/* Posizionamento del bottone di registrazione in alto a destra */
-.registration-container {
-  position: fixed;  
-  top: 20px;        
-  right: 20px;      
-  z-index: 1000;   
-}
-
 

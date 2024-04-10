@@ -7,7 +7,6 @@
 <meta charset="UTF-8">
  <link rel="stylesheet" href="css/login.css">
 <title>Login</title>
-
 </head>
 <body>
 <div class="container">
@@ -24,10 +23,7 @@
   <c:if test="${userName}"><p>nickname o password errati!</p></c:if>
  	
    <button type="submit" class="btn btn-secondary">Entra</button>
-   <div class="registration-container">
-    <button type="button" class="btn btn-primary">Registrazione</button>
-</div>
-  
+   <button type="submit" class="btn btn-secondary">Registrazione</button>
 
 </form>
 </div>

@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
  <link rel="stylesheet" href="css/login.css">
 <title>Login</title>
+
 </head>
 <body>
 <div class="container">
@@ -21,7 +22,10 @@
     <input type="password" id="password" name="password" class="form-control" placeholder="Scrivi la tua password">
   </div>
    <button type="submit" class="btn btn-secondary">Entra</button>
-   <button type="submit" class="btn btn-secondary">Registrazione</button>
+   <div class="registration-container">
+    <button type="button" class="btn btn-primary">Registrazione</button>
+</div>
+  
 
 </form>
 </div>

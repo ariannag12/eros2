@@ -27,11 +27,11 @@ public class LoginServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String nickname = request.getParameter("nickname");
+        String username = request.getParameter("username");
         String password = request.getParameter("password");
         Login user = null;
         try (LoginDao dao = new LoginDao(ds)) {
-            user = dao.get(nickname, password);
+            user = dao.get(username, password);
             request.setAttribute("user", user);
             log.info(user);
         } catch (Exception e) {

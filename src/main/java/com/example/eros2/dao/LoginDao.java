@@ -88,7 +88,11 @@ public class LoginDao implements AutoCloseable {
     }
 
     public Login registerUser(String email, String password, String userName, String firstName, String lastName,
-            String gender, Date birthdate) {
+            String gender, Date birthdate) throws SQLException {
+        if (userExists(userName) || emailExists(email)) {
+            throw new SQLException("Nickname o email già in uso");
+        }
+
         try (PreparedStatement ps = conn.prepareStatement(INSERT_USERS)) {
             ps.setString(1, email);
             ps.setString(2, password);
@@ -98,13 +102,10 @@ public class LoginDao implements AutoCloseable {
             ps.setString(6, gender);
             ps.setDate(7, birthdate);
             ps.executeUpdate();
-            log.info("User" + userName + "registered successfully.");
-        } catch (SQLException se) {
-            log.error("Error registering user " + userName, se);
         }
-
-        return null;
+        return null;  // Adjust based on your method's return needs
     }
+
 
     public Login insertProfile(String sport, String viaggiare, String lettura, String fumatore) {
         try (PreparedStatement ps = conn.prepareStatement(INSERT_PROFILE)) {

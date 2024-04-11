@@ -22,6 +22,16 @@ CREATE TABLE UserProfile (
     FOREIGN KEY (UserID) REFERENCES Users(UserID)
 );
 
+CREATE TABLE Chat (
+    ChatID SERIAL PRIMARY KEY,
+    SenderUserID INT NOT NULL,
+    ReceiverUserID INT NOT NULL,
+    Message TEXT NOT NULL,
+    Timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (SenderUserID) REFERENCES Users(UserID),
+    FOREIGN KEY (ReceiverUserID) REFERENCES Users(UserID)
+);
+
 INSERT INTO eros.Users (Email, Password, Username, FirstName, LastName, Gender, BirthDate)
 VALUES 
     ('mario@gmail.com', 'mario123', 'mario_r', 'Mario', 'Rossi', 'Maschio', '1990-05-15'),

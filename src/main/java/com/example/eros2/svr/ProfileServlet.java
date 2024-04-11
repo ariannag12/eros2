@@ -28,7 +28,7 @@ public class ProfileServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		log.traceEntry();
-		String userName = request.getParameter("userName");
+		String userName = request.getParameter("username");
 		String sport = request.getParameter("sport");
 		String viaggiare = request.getParameter("viaggiare");
 		String lettura = request.getParameter("lettura");

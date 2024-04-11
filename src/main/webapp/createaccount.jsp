@@ -23,27 +23,27 @@
 			<div class="mb-3">
 				<label for="lastName" class="form-label">Cognome</label> <input
 					name="lastName" id="cognome" class="form-control"
-					placeholder="Scrivi il tuo cognome">
+					placeholder="Scrivi il tuo cognome" required>
 			</div>
 			<div class="mb-3">
 				<label for="userName" class="form-label">Nickname</label> <input
 					name="username" id="nickname" class="form-control"
-					placeholder="Scrivi il tuo nickname">
+					placeholder="Scrivi il tuo nickname" required>
 			</div>
 			<div class="mb-3">
 				<label for="password" class="form-label">Password</label> <input
 					type="password" id="password" name="password" class="form-control"
-					placeholder="Scrivi la tua password">
+					placeholder="Scrivi la tua password" required>
 			</div>
 			<div class="mb-3">
 				<label for="email" class="form-label">Email</label> <input
 					name="email" id="email" class="form-control"
-					placeholder="Scrivi la tua email">
+					placeholder="Scrivi la tua email" required>
 			</div>
 			<div class="form-group">
 				<label class="active" for="birthdate">Data di nascita</label> <input
 					type="date" id="birthdate" name="birthdate"
-					class="form-control">
+					class="form-control" required>
 			</div>
 			<div class="card-body">
 				<h5>Come ti identifichi?</h5>

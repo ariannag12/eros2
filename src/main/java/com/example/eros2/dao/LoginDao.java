@@ -60,6 +60,32 @@ public class LoginDao implements AutoCloseable {
 
         return null;
     }
+    
+    public boolean userExists(String userName) throws SQLException {
+        String query = "SELECT COUNT(*) FROM users WHERE userName = ?";
+        try (PreparedStatement ps = conn.prepareStatement(query)) {
+            ps.setString(1, userName);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt(1) > 0;
+                }
+            }
+        }
+        return false;
+    }
+
+    public boolean emailExists(String email) throws SQLException {
+        String query = "SELECT COUNT(*) FROM users WHERE email = ?";
+        try (PreparedStatement ps = conn.prepareStatement(query)) {
+            ps.setString(1, email);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt(1) > 0;
+                }
+            }
+        }
+        return false;
+    }
 
     public Login registerUser(String email, String password, String userName, String firstName, String lastName,
             String gender, Date birthdate) {

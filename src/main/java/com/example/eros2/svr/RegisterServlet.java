@@ -8,6 +8,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Date;
+import java.sql.SQLException;
 
 import javax.sql.DataSource;
 
@@ -37,23 +38,29 @@ public class RegisterServlet extends HttpServlet {
         Date birthDate = Date.valueOf(request.getParameter("birthDate"));
         
         try (LoginDao dao = new LoginDao(ds)) {
-            //Check users is into database 
-            if (dao.get(userName, password) != null) {
-                log.warn("L'utente " + userName + " è già registrato.");
-                //  Handle the case when the user is already registered
-                //  Here you may redirect the user to an error page or display an appropriate message  
-                request.getRequestDispatcher("").forward(request, response);
+            boolean usernameExists = dao.userExists(userName);
+            boolean emailExists = dao.emailExists(email);
+            
+            if (usernameExists || emailExists) {
+                if (usernameExists) {
+                    request.setAttribute("errorMessage", "Username already in use");
+                }
+                if (emailExists) {
+                    request.setAttribute("errorMessage", "Email already in use");
+                }
+                request.getRequestDispatcher("createaccount.jsp").forward(request, response);
             } else {
-                //register the user into database
                 dao.registerUser(email, password, userName, firstName, lastName, gender, birthDate);
-                log.info("L'utente " + userName + " è stato registrato con successo.");
-                //Redirects the user to the login page after registration
-                request.getRequestDispatcher("account-form.html").forward(request, response);
+                log.info("User " + userName + " registered successfully.");
+                response.sendRedirect("account-form.html");  // Use sendRedirect for changing page to avoid form resubmission issues
             }
+        } catch (SQLException e) {
+            log.error("Error during registration for user " + userName, e);
+            request.setAttribute("errorMessage", "Registration error. Please try again.");
+            request.getRequestDispatcher("createaccount.jsp").forward(request, response);
         } catch (Exception e) {
-            log.error("Errore durante la registrazione dell'utente " + userName, e);
-            // Handle the error by displaying an appropriate error message  
-            // For example: request.getRequestDispatcher("error.jsp").forward(request, response);
+            log.error("Unexpected error", e);
+            request.getRequestDispatcher("error.jsp").forward(request, response);
         }
     }
 }

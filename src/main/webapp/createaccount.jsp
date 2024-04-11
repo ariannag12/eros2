@@ -14,21 +14,24 @@
 <body>
 	<div class="container">
 		<h1>Crea il tuo Account</h1>
-		<form method="post" action="account-form.html">
+		<form method="post" action="/eros2/register">
 			<div class="mb-3">
-				<label for="firstName" class="form-label">Nome</label> 
-				<input type="text" name="firstName"
-					id="nome" class="form-control" placeholder="Scrivi il tuo nome" required>
+				<label for="firstName" class="form-label">Nome</label> <input
+					type="text" name="firstName" id="nome" class="form-control"
+					placeholder="Scrivi il tuo nome" required>
 			</div>
 			<div class="mb-3">
 				<label for="lastName" class="form-label">Cognome</label> <input
-					name="lastName" id="cognome" class="form-control"
+					type="text" name="lastName" id="cognome" class="form-control"
 					placeholder="Scrivi il tuo cognome" required>
 			</div>
 			<div class="mb-3">
 				<label for="userName" class="form-label">Nickname</label> <input
-					name="username" id="nickname" class="form-control"
+					type="text" name="username" id="nickname" class="form-control"
 					placeholder="Scrivi il tuo nickname" required>
+				<c:if test="${not empty errorMessage}">
+					<div class="alert alert-danger">Nickname già in uso</div>
+				</c:if>
 			</div>
 			<div class="mb-3">
 				<label for="password" class="form-label">Password</label> <input
@@ -37,13 +40,16 @@
 			</div>
 			<div class="mb-3">
 				<label for="email" class="form-label">Email</label> <input
-					name="email" id="email" class="form-control"
+					type="email" name="email" id="email" class="form-control"
 					placeholder="Scrivi la tua email" required>
+				<c:if test="${not empty errorMessage}">
+					<div class="alert alert-danger">Email già in uso</div>
+				</c:if>
 			</div>
 			<div class="form-group">
 				<label class="active" for="birthdate">Data di nascita</label> <input
-					type="date" id="birthdate" name="birthdate"
-					class="form-control" required>
+					type="date" id="birthdate" name="birthDate" class="form-control"
+					required>
 			</div>
 			<div class="card-body">
 				<h5>Come ti identifichi?</h5>

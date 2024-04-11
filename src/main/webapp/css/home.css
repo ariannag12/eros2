@@ -5,3 +5,9 @@
 	margin: 10px;
 }
 
+.registration-container {
+	position: fixed;
+	top: 20px;
+	right: 20px;
+	z-index: 1000;
+}

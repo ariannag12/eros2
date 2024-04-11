@@ -15,7 +15,7 @@ public class Login {
     private String firstName;
     private String lastName;
     private String gender;
-    private Date birthdate;
+    private Date birthdate; //LocalDateTime, evitare che vadano fuori (in giro) jsql!
     private int userProfileID;
     private Boolean sport;       // Changed to Boolean
     private Boolean viaggiare;   // Changed to Boolean

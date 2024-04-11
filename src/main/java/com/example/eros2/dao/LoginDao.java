@@ -27,8 +27,8 @@ public class LoginDao implements AutoCloseable {
             INSERT INTO users (email, password, userName, firstName, lastName, gender, birthdate) VALUES
                 (?, ?, ?, ?, ?, ?, ?)""";
     private static final String INSERT_PROFILE = """
-            INSERT INTO UserProfile (sport, viaggiare, lettura, fumatore) VALUES
-                (?, ?, ?, ?)""";
+            INSERT INTO UserProfile (bio, sport, viaggiare, lettura, fumatore) VALUES
+                (?, ?, ?, ?, ?)""";
     private static final String UPDATE_PROFILE = """
             UPDATE UserProfile
             SET sport = ?, viaggiare = ?, lettura = ?, fumatore = ?
@@ -36,28 +36,28 @@ public class LoginDao implements AutoCloseable {
     private Connection conn;
 
     public LoginDao(DataSource ds) {
-        log.traceEntry();
-
         try {
-            this.conn = ds.getConnection();
+            this.conn = ds.getConnection();  // Stabilisce la connessione con il database
+            log.trace("Connessione al database stabilita.");
         } catch (SQLException ex) {
-            throw new IllegalStateException(ex);
+            log.error("Impossibile stabilire la connessione con il database.", ex);
+            throw new IllegalStateException("Impossibile stabilire la connessione con il database.", ex);
         }
     }
 
-    public Login get(String userName, String password) {
+    public Login get(String userName, String password) throws SQLException {
         try (PreparedStatement ps = conn.prepareStatement(LOGIN)) {
             ps.setString(1, userName);
             ps.setString(2, password);
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
-                    return new Login(rs.getString(1), rs.getString(2), rs.getString(3));
+                    return new Login(rs.getString("userName"), rs.getString("firstName"), rs.getString("lastName"));
                 }
             }
         } catch (SQLException se) {
-            log.error("Can't get user " + userName, se);
+            log.error("Errore durante il recupero dell'utente " + userName, se);
+            throw se;
         }
-
         return null;
     }
     
@@ -102,17 +102,19 @@ public class LoginDao implements AutoCloseable {
             ps.setString(6, gender);
             ps.setDate(7, birthdate);
             ps.executeUpdate();
+            log.info("Utente registrato con successo: " + userName);
         }
         return null;  // Adjust based on your method's return needs
     }
 
 
-    public Login insertProfile(String sport, String viaggiare, String lettura, String fumatore) {
+    public Login insertProfile(String bio, boolean sport, boolean viaggiare, boolean lettura, String fumatore) throws SQLException {
         try (PreparedStatement ps = conn.prepareStatement(INSERT_PROFILE)) {
-            ps.setString(1, sport);
-            ps.setString(2, viaggiare);
-            ps.setString(3, lettura);
-            ps.setString(4, fumatore);
+            ps.setString(1, bio);
+            ps.setBoolean(2, sport);
+            ps.setBoolean(3, viaggiare);
+            ps.setBoolean(4, lettura);
+            ps.setString(5, fumatore);
         } catch (SQLException se) {
             log.error("Existing Profile");
         }
@@ -141,10 +143,14 @@ public class LoginDao implements AutoCloseable {
 
     @Override
     public void close() throws Exception {
-        try {
-            conn.close();
-        } catch (SQLException ex) {
-            throw new IllegalStateException(ex);
+        if (conn != null) {
+            try {
+                conn.close();
+                log.trace("Connessione al database chiusa.");
+            } catch (SQLException ex) {
+                log.error("Errore nella chiusura della connessione al database.", ex);
+                throw new IllegalStateException("Errore nella chiusura della connessione al database.", ex);
+            }
         }
     }
 }

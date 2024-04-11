@@ -20,8 +20,12 @@ CREATE TABLE UserProfile (
     Bio TEXT,
     ProfilePicURL VARCHAR(255),
     Location VARCHAR(255),
-    
-    FOREIGN KEY (UserID) REFERENCES Users(UserID)
+    Sport BOOLEAN DEFAULT FALSE,
+    Viaggiare BOOLEAN DEFAULT FALSE,
+    Lettura BOOLEAN DEFAULT FALSE,
+    Fumatore VARCHAR(50),  -- "Si", "No", "Indifferente", "Solo la mattina", "Solo il pomeriggio"
+
+    FOREIGN KEY (UserID) REFERENCES eros.Users(UserID)
 );
 
 CREATE TABLE Chat (
@@ -41,11 +45,10 @@ VALUES
     ('laura@gmail.com', 'laura456', 'laura_b', 'Laura', 'Bianchi', 'Femmina', '1993-10-20');
 
 -- Inserire dati nella tabella UserProfile
-INSERT INTO UserProfile (UserID, Bio, ProfilePicURL, Location)
+INSERT INTO UserProfile (UserID, Bio, ProfilePicURL, Location, Sport, Viaggiare, Lettura, Fumatore)
 VALUES
-    (1, 'Sono Mario Rossi, un appassionato di tecnologie web.', 'https://example.com/mario.jpg', 'Roma'),
-    (2, 'Ciao! Sono Laura Bianchi e amo viaggiare.', 'https://example.com/laura.jpg', 'Milano');
-   
+    (1, 'Sono Mario Rossi, un appassionato di tecnologie web.', 'https://example.com/mario.jpg', 'Roma', TRUE, FALSE, TRUE, 'No'),
+    (2, 'Ciao! Sono Laura Bianchi e amo viaggiare.', 'https://example.com/laura.jpg', 'Milano', FALSE, TRUE, TRUE, 'Si');
    --Inserire dati nella tabella Chat
    
    INSERT INTO Chat (SenderUserID, ReceiverUserID, Message)

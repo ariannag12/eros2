@@ -47,11 +47,11 @@
     <a href="#" class="btn btn-secondary">Entra</a>
   </div>
 </div>
-<div class="registration-container">
+</main>
+	<div class="registration-container">
 				<a href="index.html">
 					<button type="button" class="btn btn-secondary">Logout</button>
 				</a>
 			</div>
-</main>
 </body>
 </html>

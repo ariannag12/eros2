@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,33 +16,34 @@
 		<h1>Crea il tuo Account</h1>
 		<form method="post" action="account-form.html">
 			<div class="mb-3">
-				<label for="firstName" class="form-label">Nome</label> <input name="firstName"
-					id="nome" class="form-control" placeholder="Scrivi il tuo nome">
+				<label for="firstName" class="form-label">Nome</label> 
+				<input type="text" name="firstName"
+					id="nome" class="form-control" placeholder="Scrivi il tuo nome" required>
 			</div>
 			<div class="mb-3">
 				<label for="lastName" class="form-label">Cognome</label> <input
 					name="lastName" id="cognome" class="form-control"
-					placeholder="Scrivi il tuo cognome">
+					placeholder="Scrivi il tuo cognome" required>
 			</div>
 			<div class="mb-3">
 				<label for="userName" class="form-label">Nickname</label> <input
 					name="username" id="nickname" class="form-control"
-					placeholder="Scrivi il tuo nickname">
+					placeholder="Scrivi il tuo nickname" required>
 			</div>
 			<div class="mb-3">
 				<label for="password" class="form-label">Password</label> <input
 					type="password" id="password" name="password" class="form-control"
-					placeholder="Scrivi la tua password">
+					placeholder="Scrivi la tua password" required>
 			</div>
 			<div class="mb-3">
 				<label for="email" class="form-label">Email</label> <input
 					name="email" id="email" class="form-control"
-					placeholder="Scrivi la tua email">
+					placeholder="Scrivi la tua email" required>
 			</div>
 			<div class="form-group">
 				<label class="active" for="birthdate">Data di nascita</label> <input
 					type="date" id="birthdate" name="birthdate"
-					class="form-control">
+					class="form-control" required>
 			</div>
 			<div class="card-body">
 				<h5>Come ti identifichi?</h5>

@@ -22,5 +22,23 @@
 			<h1>Credenziali non valide</h1>
 		</c:otherwise>
 	</c:choose>
+ <main  class="d-flex p-2">
+ <div class="card" style="width: 18rem; margin-right:15px;">
+  <img src="img/chat.jpg" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">Chat</h5>
+    <p class="card-text">Inizia a chattare con i tuoi match.</p>
+    <a href="#" class="btn btn-primary">Entra</a>
+  </div>
+</div>
+<div class="card" style="width: 18rem;">
+  <img src="img/image.png" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">Cerca Profili</h5>
+    <p class="card-text">Scopri profili vicino a te.</p>
+    <a href="#" class="btn btn-primary">Entra</a>
+  </div>
+</div>
+        </main>
 </body>
 </html>

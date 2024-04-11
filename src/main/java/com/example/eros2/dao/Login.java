@@ -23,6 +23,12 @@ public class Login {
     
     public Login() {
     }
+    
+    public Login(String userName, String firstName, String lastName) {
+        this.userName = userName;
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
 
     public Login(String userName, String firstName, String lastName, String email, String password, String gender, Date birthdate, int userProfileID, String sport, String viaggiare, String lettura, String fumatore) {
         this.email = email;

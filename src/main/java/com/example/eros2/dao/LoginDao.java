@@ -51,7 +51,7 @@ public class LoginDao implements AutoCloseable {
             ps.setString(2, password);
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
-//                    return new Login(rs.getString(1), rs.getString(2), rs.getString(3), null, null, null, null);
+                    return new Login(rs.getString(1), rs.getString(2), rs.getString(3));
                 }
             }
         } catch (SQLException se) {

@@ -17,16 +17,18 @@
 			<div class="mb-3">
 				<label for="nickname" class="form-label">Nickname</label> <input
 					name="username" id="nickname" class="form-control"
-					placeholder="Scrivi il tuo nickname" value="${userName}">
+					placeholder="Scrivi il tuo nickname"
+					value="${not empty param.username ? param.username : ''}">
 			</div>
+
 			<div class="mb-3">
 				<label for="password" class="form-label">Password</label> <input
 					type="password" id="password" name="password" class="form-control"
 					placeholder="Scrivi la tua password">
 			</div>
-			<c:if test="${userName}">
-				<p>nickname o password errati!</p>
-			</c:if>
+            <c:if test="${not empty param.username and empty user}">
+                <div class="alert alert-danger">Nickname o password errati!</div>
+            </c:if>
 
 			<button type="submit" class="btn btn-secondary">Entra</button>
 

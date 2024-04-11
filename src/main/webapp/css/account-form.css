@@ -13,16 +13,31 @@ img {
 	margin-bottom: 60px;
 }
 
+.card-body {
+padding: 0;
+padding-top:20px;
+padding-bottom:15px;
+}
+
 .form-control {
 	width:100%;
 }
 
+.button {
+	margin: 0 auto;
+}
+
 button {
-	width: 100px;
+		width: 100px;
 }
 .registration-container {
   position: fixed;  
   top: 20px;        
   right: 20px;
     z-index: 1000;   
+}
+
+h2 {
+	padding-bottom:5px;
+	padding-top:10px;
 }

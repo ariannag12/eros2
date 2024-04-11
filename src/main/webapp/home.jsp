@@ -44,7 +44,7 @@
   <div class="card-body">
     <h5 class="card-title">Profilo personale</h5>
     <p class="card-text">Entra nella tua area personale.</p>
-    <a href="#" class="btn btn-secondary">Entra</a>
+    <a href="account-form.jsp" class="btn btn-secondary">Entra</a>
   </div>
 </div>
 </main>

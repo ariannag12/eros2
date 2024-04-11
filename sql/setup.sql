@@ -1,3 +1,4 @@
+DROP TABLE IF EXISTS Chat;
 DROP TABLE IF EXISTS UserProfile;
 DROP TABLE IF EXISTS eros.Users;
 
@@ -19,15 +20,17 @@ CREATE TABLE UserProfile (
     Bio TEXT,
     ProfilePicURL VARCHAR(255),
     Location VARCHAR(255),
+    
     FOREIGN KEY (UserID) REFERENCES Users(UserID)
 );
 
 CREATE TABLE Chat (
     ChatID SERIAL PRIMARY KEY,
-    SenderUserID INT NOT NULL,
-    ReceiverUserID INT NOT NULL,
     Message TEXT NOT NULL,
     Timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    SenderUserID INT NOT NULL,
+    ReceiverUserID INT NOT NULL,  
+   
     FOREIGN KEY (SenderUserID) REFERENCES Users(UserID),
     FOREIGN KEY (ReceiverUserID) REFERENCES Users(UserID)
 );
@@ -42,6 +45,13 @@ INSERT INTO UserProfile (UserID, Bio, ProfilePicURL, Location)
 VALUES
     (1, 'Sono Mario Rossi, un appassionato di tecnologie web.', 'https://example.com/mario.jpg', 'Roma'),
     (2, 'Ciao! Sono Laura Bianchi e amo viaggiare.', 'https://example.com/laura.jpg', 'Milano');
+   
+   --Inserire dati nella tabella Chat
+   
+   INSERT INTO Chat (SenderUserID, ReceiverUserID, Message)
+   VALUES 
+    (1, 2, 'Ciao, come va?'),
+    (2, 1, 'Oggi ho un gran mal di testa! E tu?');
 
 --dati inseriti---
    

@@ -17,3 +17,9 @@ h5 {
 label #dateStandard {
 	padding-bottom:5px;
 }
+.registration-container {
+  position: fixed;  
+  top: 20px;        
+  right: 20px;
+    z-index: 1000;   
+}

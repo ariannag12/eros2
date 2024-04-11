@@ -9,3 +9,9 @@ img.card-img-top {
 	width:200px;
 	height:200px;
 }
+.registration-container {
+  position: fixed;  
+  top: 20px;        
+  right: 20px;
+    z-index: 1000;   
+}

@@ -33,7 +33,7 @@
 			<button type="submit" class="btn btn-secondary">Entra</button>
 
 			<div class="registration-container">
-				<a href="createaccount.html">
+				<a href="createaccount.jsp">
 					<button type="button" class="btn btn-secondary">Registrazione</button>
 				</a>
 			</div>

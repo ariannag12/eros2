@@ -8,6 +8,7 @@ package com.example.eros2.dao;
 import java.sql.Date;
 
 public class Login {
+    private int userID;
     private String email;
     private String password;
     private String userName;
@@ -16,9 +17,9 @@ public class Login {
     private String gender;
     private Date birthdate;
     private int userProfileID;
-    private String sport;
-    private String viaggiare;
-    private String lettura;
+    private Boolean sport;       // Changed to Boolean
+    private Boolean viaggiare;   // Changed to Boolean
+    private Boolean lettura;     // Changed to Boolean
     private String fumatore;
     
     public Login() {
@@ -30,7 +31,7 @@ public class Login {
         this.lastName = lastName;
     }
 
-    public Login(String userName, String firstName, String lastName, String email, String password, String gender, Date birthdate, int userProfileID, String sport, String viaggiare, String lettura, String fumatore) {
+    public Login(String userName, String firstName, String lastName, String email, String password, String gender, Date birthdate, int userProfileID, Boolean sport, Boolean viaggiare, Boolean lettura, String fumatore) {
         this.email = email;
         this.password = password;
         this.userName = userName;
@@ -45,6 +46,14 @@ public class Login {
         this.fumatore = fumatore;
     }
 
+    public int getUserID() {
+        return userID;
+    }
+
+    public void setUserID(int userID) {
+        this.userID = userID;
+    }
+    
     public String getEmail() {
         return email;
     }
@@ -105,36 +114,28 @@ public class Login {
         this.userProfileID = userProfileID;
     }
 
-    public String getSport() {
+    public Boolean getSport() {
         return sport;
     }
 
-    public void setSport(String sport) {
+    public void setSport(Boolean sport) {
         this.sport = sport;
     }
 
-    public String getViaggiare() {
+    public Boolean getViaggiare() {
         return viaggiare;
     }
 
-    public void setViaggiare(String viaggiare) {
+    public void setViaggiare(Boolean viaggiare) {
         this.viaggiare = viaggiare;
     }
 
-    public String getLettura() {
+    public Boolean getLettura() {
         return lettura;
     }
 
-    public void setLettura(String lettura) {
+    public void setLettura(Boolean lettura) {
         this.lettura = lettura;
-    }
-
-    public String getFumatore() {
-        return fumatore;
-    }
-
-    public void setFumatore(String fumatore) {
-        this.fumatore = fumatore;
     }
 
     public void setBirthdate(Date birthdate) {

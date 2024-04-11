@@ -18,9 +18,6 @@
 		<c:when test="${not empty user}">
 			<h1>Ciao e benvenuto, ${user.firstName}</h1>
 		</c:when>
-				<c:otherwise>
-			<h1>Credenziali non valide</h1>
-		</c:otherwise>
 	</c:choose>
  <main  class="d-flex p-2">
  <div class="card" style="width: 15rem; margin-right:15px;">

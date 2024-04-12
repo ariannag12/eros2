@@ -14,7 +14,7 @@ import java.io.IOException;
 
 
 @WebServlet("/chat/insert")
-public class ChatServlet extends HttpServlet { /**
+public class ChatInsertSVR extends HttpServlet { /**
      * 
      */
     private static final long serialVersionUID = 755015009380990069L;

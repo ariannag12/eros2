@@ -52,7 +52,7 @@ public class RegisterServlet extends HttpServlet {
             } else {
                 dao.registerUser(email, password, userName, firstName, lastName, gender, birthDate);
                 log.info("User " + userName + " registered successfully.");
-                response.sendRedirect("account-form.html");  // Use sendRedirect for changing page to avoid form resubmission issues
+                response.sendRedirect("account-form.jsp");  // Use sendRedirect for changing page to avoid form resubmission issues
             }
         } catch (SQLException e) {
             log.error("Error during registration for user " + userName, e);

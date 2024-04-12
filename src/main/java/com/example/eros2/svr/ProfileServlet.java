@@ -41,10 +41,15 @@ public class ProfileServlet extends HttpServlet {
             response.sendRedirect("login.jsp"); // Reindirizza al login se non c'è sessione o utente loggato.
             return;
         }       
-        // Recupera i dati dal form.
+        // Assicurati che l'userID sia di tipo Integer e che esista realmente.
         Integer userId = (Integer) session.getAttribute("userID");
+        if (userId == null || userId == 0) {
+            log.warn("UserID non valido o non presente nella sessione.");
+            response.sendRedirect("login.jsp");
+            return;
+        }
+        
         String bio = request.getParameter("bio");
-        // I valori booleani sono ottenuti direttamente dai parametri del form.
         boolean sport = "on".equals(request.getParameter("sport"));
         boolean viaggiare = "on".equals(request.getParameter("viaggiare"));
         boolean lettura = "on".equals(request.getParameter("lettura"));

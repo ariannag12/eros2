@@ -6,6 +6,8 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+
 import java.io.IOException;
 
 import javax.sql.DataSource;
@@ -29,20 +31,22 @@ public class LoginServlet extends HttpServlet {
             throws ServletException, IOException {
         String userName = request.getParameter("username");
         String password = request.getParameter("password");
-        Login user = null;
+        
         try (LoginDao dao = new LoginDao(ds)) {
-            user = dao.get(userName, password);
-            request.setAttribute("user", user);
-            log.info(user);
+            Login user = dao.get(userName, password);
+            if (user != null) {
+                HttpSession session = request.getSession(true);
+                session.setAttribute("user", user);
+                session.setAttribute("userID", user.getUserID());  // Assuming Login class has getUserID() method.
+                response.sendRedirect("home.jsp");
+            } else {
+                request.setAttribute("loginError", "Invalid username or password");
+                request.getRequestDispatcher("login.jsp").forward(request, response);
+            }
         } catch (Exception e) {
-            log.error("");
-        }
-        if (user !=null) {
-            request.getRequestDispatcher("home.jsp").forward(request, response);
-        } else {
+            log.error("Login error", e);
+            request.setAttribute("loginError", "System error during login. Please try again.");
             request.getRequestDispatcher("login.jsp").forward(request, response);
         }
-
     }
-
 }

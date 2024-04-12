@@ -23,44 +23,46 @@ public class LoginDao implements AutoCloseable {
             SELECT userName, firstName, lastName
             FROM users
             WHERE userName = ? and password = ?""";
+
     private static final String INSERT_USERS = """
             INSERT INTO users (email, password, userName, firstName, lastName, gender, birthdate) VALUES
                 (?, ?, ?, ?, ?, ?, ?)""";
+    
     private static final String INSERT_PROFILE = """
-            INSERT INTO UserProfile (sport, viaggiare, lettura, fumatore) VALUES
-                (?, ?, ?, ?)""";
+                INSERT INTO UserProfile (UserID, Bio, Sport, Viaggiare, Lettura, Fumatore) 
+                VALUES (?, ?, ?, ?, ?, ?)""";
+
     private static final String UPDATE_PROFILE = """
-            UPDATE UserProfile
-            SET sport = ?, viaggiare = ?, lettura = ?, fumatore = ?
-            WHERE UserProfileID = ? """;
+            UPDATE UserProfile SET Sport = ?, Viaggiare = ?, Lettura = ?, Fumatore = ? 
+            WHERE UserProfileID = ?""";
     private Connection conn;
 
     public LoginDao(DataSource ds) {
-        log.traceEntry();
-
         try {
-            this.conn = ds.getConnection();
+            this.conn = ds.getConnection(); // Stabilisce la connessione con il database
+            log.trace("Connessione al database stabilita.");
         } catch (SQLException ex) {
-            throw new IllegalStateException(ex);
+            log.error("Impossibile stabilire la connessione con il database.", ex);
+            throw new IllegalStateException("Impossibile stabilire la connessione con il database.", ex);
         }
     }
 
-    public Login get(String userName, String password) {
+    public Login get(String userName, String password) throws SQLException {
         try (PreparedStatement ps = conn.prepareStatement(LOGIN)) {
             ps.setString(1, userName);
             ps.setString(2, password);
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
-                    return new Login(rs.getString(1), rs.getString(2), rs.getString(3));
+                    return new Login(rs.getString("userName"), rs.getString("firstName"), rs.getString("lastName"));
                 }
             }
         } catch (SQLException se) {
-            log.error("Can't get user " + userName, se);
+            log.error("Errore durante il recupero dell'utente " + userName, se);
+            throw se;
         }
-
         return null;
     }
-    
+
     public boolean userExists(String userName) throws SQLException {
         String query = "SELECT COUNT(*) FROM users WHERE userName = ?";
         try (PreparedStatement ps = conn.prepareStatement(query)) {
@@ -102,49 +104,59 @@ public class LoginDao implements AutoCloseable {
             ps.setString(6, gender);
             ps.setDate(7, birthdate);
             ps.executeUpdate();
+            log.info("Utente registrato con successo: " + userName);
         }
-        return null;  // Adjust based on your method's return needs
+        return null; // Adjust based on your method's return needs
     }
 
-
-    public Login insertProfile(String sport, String viaggiare, String lettura, String fumatore) {
+    public Login insertProfile(int userID, String bio, boolean sport, boolean viaggiare, boolean lettura, String fumatore)
+            throws SQLException {
         try (PreparedStatement ps = conn.prepareStatement(INSERT_PROFILE)) {
-            ps.setString(1, sport);
-            ps.setString(2, viaggiare);
-            ps.setString(3, lettura);
-            ps.setString(4, fumatore);
+            ps.setInt(1, userID);
+            ps.setString(2, bio);
+            ps.setBoolean(3, sport);
+            ps.setBoolean(4, viaggiare);
+            ps.setBoolean(5, lettura);
+            ps.setString(6, fumatore);
+            ps.executeUpdate();
+            log.info("Profilo inserito con successo.");
         } catch (SQLException se) {
-            log.error("Existing Profile");
+            log.error("Errore nell'inserimento del profilo", se);
+            throw se;  // Rilancia l'eccezione per gestione esterna
         }
         return null;
     }
 
-    public Login updateProfile(String sport, String viaggiare, String lettura, String fumatore, int userProfileID) {
+    public Login updateProfile(int userProfileID, boolean sport, boolean viaggiare, boolean lettura, String fumatore) throws SQLException {
         try (PreparedStatement ps = conn.prepareStatement(UPDATE_PROFILE)) {
-            ps.setString(1, sport);
-            ps.setString(2, viaggiare);
-            ps.setString(3, lettura);
+            ps.setBoolean(1, sport);
+            ps.setBoolean(2, viaggiare);
+            ps.setBoolean(3, lettura);
             ps.setString(4, fumatore);
             ps.setInt(5, userProfileID);
             int rowsUpdated = ps.executeUpdate();
             if (rowsUpdated > 0) {
-                log.info("Profile updated successfully for " + userProfileID);
+                log.info("Profilo aggiornato con successo.");
             } else {
-                log.warn("No profile found for " + userProfileID);
+                log.warn("Nessun profilo trovato con ID: " + userProfileID);
             }
         } catch (SQLException se) {
-            log.error("Data not updated", se);
+            log.error("Errore nell'aggiornamento del profilo", se);
+            throw se;
         }
-
         return null;
     }
 
     @Override
     public void close() throws Exception {
-        try {
-            conn.close();
-        } catch (SQLException ex) {
-            throw new IllegalStateException(ex);
+        if (conn != null) {
+            try {
+                conn.close();
+                log.trace("Connessione al database chiusa.");
+            } catch (SQLException ex) {
+                log.error("Errore nella chiusura della connessione al database.", ex);
+                throw new IllegalStateException("Errore nella chiusura della connessione al database.", ex);
+            }
         }
     }
 }

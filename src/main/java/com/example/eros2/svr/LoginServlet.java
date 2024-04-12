@@ -35,7 +35,7 @@ public class LoginServlet extends HttpServlet {
         try (LoginDao dao = new LoginDao(ds)) {
             Login user = dao.get(userName, password);
             if (user != null) {
-                HttpSession session = request.getSession();
+                HttpSession session = request.getSession(true);
                 session.setAttribute("user", user);
                 session.setAttribute("userID", user.getUserID());  // Assuming Login class has getUserID() method.
                 response.sendRedirect("home.jsp");

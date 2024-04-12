@@ -52,9 +52,9 @@ public class ProfileServlet extends HttpServlet {
 
         try (LoginDao dao = new LoginDao(ds)) {
             // Utilizza il metodo del DAO per inserire il profilo nel database.
-            dao.insertProfile(bio, sport, viaggiare, lettura, fumatore);
+            dao.insertProfile(userId, bio, sport, viaggiare, lettura, fumatore);
             log.info("Profilo inserito correttamente per l'utente ID: " + userId);
-            response.sendRedirect("profile-success.jsp"); // Reindirizza alla pagina di successo.
+            response.sendRedirect("home.jsp"); // Reindirizza alla pagina di successo.
         } catch (Exception e) {
             log.error("Errore nell'inserimento dei dati del profilo.", e);
             request.setAttribute("errorMessage", "Errore nel salvataggio del profilo. Riprova.");

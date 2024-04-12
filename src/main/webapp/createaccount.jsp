@@ -55,19 +55,19 @@
 				<h5>Come ti identifichi?</h5>
 			</div>
 			<div class="form-check">
-				<input class="form-check-input" type="radio" name="flexRadioDefault"
-					id="flexRadioDefault1"> <label class="form-check-label"
-					for="flexRadioDefault1"> Maschio </label>
+				<input class="form-check-input" type="radio" name="gender" id="male"
+					value="Maschio"> <label class="form-check-label" for="male">
+					Maschio </label>
 			</div>
 			<div class="form-check">
-				<input class="form-check-input" type="radio" name="flexRadioDefault"
-					id="flexRadioDefault1"> <label class="form-check-label"
-					for="flexRadioDefault1"> Femmina </label>
+				<input class="form-check-input" type="radio" name="gender"
+					id="female" value="Femmina"> <label
+					class="form-check-label" for="female"> Femmina </label>
 			</div>
 			<div class="form-check">
-				<input class="form-check-input" type="radio" name="flexRadioDefault"
-					id="flexRadioDefault1"> <label class="form-check-label"
-					for="flexRadioDefault1"> Non-binary </label>
+				<input class="form-check-input" type="radio" name="gender"
+					id="non-binary" value="Non-binary"> <label
+					class="form-check-label" for="non-binary"> Non-binary </label>
 			</div>
 			<div class=button>
 				<button type="submit" class="btn btn-secondary">Registrati</button>
@@ -75,9 +75,10 @@
 		</form>
 	</div>
 	<div class="registration-container">
-				<a href="index.html">
-					<button type="button" class="btn btn-secondary">Torna alla home</button>
-				</a>
-			</div>
+		<a href="index.html">
+			<button type="button" class="btn btn-secondary">Torna alla
+				home</button>
+		</a>
+	</div>
 </body>
 </html>

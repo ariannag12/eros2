@@ -1,5 +1,5 @@
 select *
-from users;
+from userprofile u ;
 
-SELECT*
-FROM chat;
+select *
+from users u;
